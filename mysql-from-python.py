@@ -11,11 +11,11 @@ connection = pymysql.connect(host='localhost',
 
 try:
     # run a query
-    with connection.cursor() as cursor:
-        sql = "SELECT * FROM Artist;"
+    with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+        sql = "SELECT * FROM Genre;"
         cursor.execute(sql)
-        result = cursor.fetchall()
-        print(result)
+        for row in cursor:
+            print(row)
 finally:
     # close the connection
     connection.close()
